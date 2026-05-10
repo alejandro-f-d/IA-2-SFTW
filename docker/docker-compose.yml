@@ -1,0 +1,45 @@
+name: primera-practica-ia-software-abierto
+services:
+  grobid:
+    container_name: grobid_ia_2
+    image: grobid/grobid:0.8.2-full
+    restart: always
+    ports:
+      - "${GROBID_EXTERNAL_PORT}:8070"
+    networks:
+      - net_ia_practica_2
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8070/api/isalive"]
+      interval: 10s    
+      timeout: 5s     
+      retries: 10      
+      start_period: 30s
+    init: true
+    ulimits:
+      core: 0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  python-service: 
+    container_name: python_ia_1
+    build: ./pygrobid/
+    depends_on:
+      grobid:
+        condition: service_healthy 
+    environment:
+      GROBID_URL: "http://grobid:8070/api/processFulltextDocument"
+      CANTIDAD_PALABRAS: ${CANTIDAD_PALABRAS}
+    volumes:
+      - ./pygrobid/input:/input
+      - ./pygrobid/output:/output
+    networks:
+      - net_ia_practica_2
+networks:
+  net_ia_practica_2:
+    driver: bridge
