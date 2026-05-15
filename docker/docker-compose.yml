@@ -26,8 +26,8 @@ services:
               count: all
               capabilities: [gpu]
 
-  python-service: 
-    container_name: python_ia_1
+  python-xml: 
+    container_name: python_xml
     build: ./pygrobid/
     depends_on:
       grobid:
@@ -40,6 +40,22 @@ services:
       - ./pygrobid/output:/output
     networks:
       - net_ia_practica_2
+
+  python-data:
+    container_name: python_data
+    build: ./pyextractdata/
+    depends_on:
+      python-xml:
+        condition: service_completed_successfully # Exit 0 del proceso de python-xml.
+    volumes:
+      - ./pygrobid/output/:/input
+      - ./pyextractdata/output:/output
+    networks:
+      - net_ia_practica_2
+
+
+
+
 networks:
   net_ia_practica_2:
     driver: bridge
