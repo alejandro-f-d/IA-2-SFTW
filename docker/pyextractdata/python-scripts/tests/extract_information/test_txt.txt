@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader xml:lang="la">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Lorem Ipsum Dolor Sit Amet: Consectetur Adipiscing Elit</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher>Exemplum Publisher</publisher>
+				<availability status="free">
+					<p>Lorem Ipsum</p>
+				</availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<title level="a" type="main">Lorem Ipsum Dolor Sit Amet: Consectetur Adipiscing Elit</title>
+					</analytic>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<abstract>
+				<div xmlns="http://www.tei-c.org/ns/1.0">
+					<p>
+                        ABSTRACT_START
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        ABSTRACT_END
+                    </p>
+				</div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="la">
+		<body>
+			<div>
+				<head>I. Introductio</head>
+				<p>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
+                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
+                    excepturi sint occaecati cupiditate non provident.
+                </p>
+			</div>
+			<div type="acknowledgement">
+				<p>
+                    ACK_START
+                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis 
+                    suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
+                    Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.
+                    ACK_END
+                </p>
+			</div>
+		</body>
+		<back>
+			<div type="references">
+				<listBibl>
+					<biblStruct xml:id="b0">
+						<monogr>
+							<title level="m">De Finibus Bonorum et Malorum</title>
+							<author>Cicero</author>
+							<imprint><date type="published" when="1914">1914</date></imprint>
+						</monogr>
+					</biblStruct>
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

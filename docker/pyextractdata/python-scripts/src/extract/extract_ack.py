@@ -1,4 +1,3 @@
-import re
 from bs4 import BeautifulSoup
 def extract_ack(path):
     try:
