@@ -15,10 +15,10 @@ def login():
         "Accept": "application/json"
     }
     payload = {
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
+        "client_id": CLIENT_ID, # Este es el id de la aplicación creada
+        "client_secret": CLIENT_SECRET, # Este es el secreto de la app creada.
         "grant_type": "client_credentials",
-        "scope": "/read-public"
+        "scope": "/read-public" # Solo queremos el read only.
     }
     response = None
     try:
