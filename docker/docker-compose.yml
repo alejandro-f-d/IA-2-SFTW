@@ -53,6 +53,23 @@ services:
     networks:
       - net_ia_practica_2
 
+  python-orcid:
+    container_name: python_orcid
+    build: ./pyorcid/
+    # depends_on:
+    #   python-data:
+    #     condition: service_completed_successfully # Exit 0 del proceso de python-data.
+    volumes:
+      - ./pyextractdata/output/:/input
+      - ./pyorcid/output:/output
+    networks:
+      - net_ia_practica_2
+    environment:
+      ORCID_CLIENT_ID: ${ORCID_CLIENT_ID}
+      ORCID_CLIENT_SECRET: ${ORCID_CLIENT_SECRET}
+      CLIENT_URL: ${CLIENT_URL}
+
+
 
 
 
