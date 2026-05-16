@@ -3,7 +3,7 @@ import os
 from src.extract_information.extract_by_id import info_orcid_by_id 
 from src.process_output.processator import  get_employment_information, get_publication_information, get_researcher_information
 import json
-
+from dataclasses import asdict
 INPUT_DIR = os.getenv('INPUT_DIR', '/input') 
 OUTPUT_DIR = os.getenv('OUTPUT_DIR', '/output')
 
@@ -38,9 +38,9 @@ def main():
                                 informacion_publicaciones = get_publication_information(json_info_completa)
                                 # Diccionario para contener el resultado.
                                 resultado_investigador = {
-                                    "investigador": informacion_researcher,
-                                    "empleo": informacion_empresa,
-                                    "publicaciones": informacion_publicaciones
+                                    "investigador": asdict(informacion_researcher) if informacion_researcher else None,
+                                    "empleo": [asdict(emp) for emp in informacion_empresa],
+                                    "publicaciones": [asdict(pub) for pub in informacion_publicaciones]
                                 }
                                 output_filename = filename.replace('_people.txt', '_processed_orcid.json')
                                 output_path = os.path.join(OUTPUT_DIR, output_filename)
