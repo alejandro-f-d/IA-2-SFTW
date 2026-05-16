@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
 from typing import Optional, Any, Dict
-import json
 @dataclass
 class Researcher:
     orcid_id: str
