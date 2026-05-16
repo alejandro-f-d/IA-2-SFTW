@@ -15,6 +15,29 @@
 				<biblStruct>
 					<analytic>
 						<title level="a" type="main">Lorem Ipsum Dolor Sit Amet: Consectetur Adipiscing Elit</title>
+						<author>
+							<persName><forename type="first">JULIO</forename><surname>CÉSAR</surname></persName>
+							<idno type="ORCID">0000-0000-0000-0000</idno>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Lorem Studies</orgName>
+								<orgName type="institution">University of Ipsum</orgName>
+								<address>
+									<postCode>12345</postCode>
+									<settlement>EMÉRITA AUGUSTA</settlement>
+									<country key="US">ROMULO Y REMO</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">Elit Research Lab</orgName>
+								<orgName type="institution" key="instit2">Eiusmod University</orgName>
+								<address>
+									<postCode>9876</postCode>
+									<settlement>Temporville</settlement>
+									<region>Incididunt</region>
+									<country key="AU">Australia</country>
+								</address>
+							</affiliation>
+						</author>
 					</analytic>
 				</biblStruct>
 			</sourceDesc>
@@ -23,14 +46,14 @@
 			<abstract>
 				<div xmlns="http://www.tei-c.org/ns/1.0">
 					<p>
-                        ABSTRACT_START
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        ABSTRACT_END
-                    </p>
+						ABSTRACT_START
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+						ABSTRACT_END
+					</p>
 				</div>
 			</abstract>
 		</profileDesc>
@@ -40,19 +63,19 @@
 			<div>
 				<head>I. Introductio</head>
 				<p>
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
-                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
-                    excepturi sint occaecati cupiditate non provident.
-                </p>
+					At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
+					praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
+					excepturi sint occaecati cupiditate non provident.
+				</p>
 			</div>
 			<div type="acknowledgement">
 				<p>
-                    ACK_START
-                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis 
-                    suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
-                    Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.
-                    ACK_END
-                </p>
+					ACK_START
+					Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis 
+					suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
+					Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.
+					ACK_END
+				</p>
 			</div>
 		</body>
 		<back>

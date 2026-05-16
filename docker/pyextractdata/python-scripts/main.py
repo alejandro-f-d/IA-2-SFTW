@@ -2,6 +2,7 @@ import os
 from src.save.save import save_content
 from src.extract.extract_abstract import extract_abstract
 from src.extract.extract_ack import extract_ack
+from src.extract.extract_people import extract_people
 
 INPUT_DIR = os.getenv('INPUT_DIR', '/input') 
 OUTPUT_DIR = os.getenv('OUTPUT_DIR', '/output')
@@ -34,6 +35,13 @@ def main():
             save_content(ack_data, save_path)
         else: 
             print(f"Fallo al generar el ack de: {filename}")
+        people_data = extract_people(xml_path)
+        if people_data:
+            people_file_name = filename.replace('.xml', '_people.txt')
+            save_path = os.path.join(OUTPUT_DIR, people_file_name)
+            save_content(people_data, save_path)
+        else: 
+            print(f"Fallo al generar los autores de: {filename}")
 
 if __name__ == "__main__":
     main()
