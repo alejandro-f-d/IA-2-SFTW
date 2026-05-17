@@ -73,7 +73,7 @@ services:
     container_name: python_wikidata
     build: ./pywikidata/
     depends_on: 
-      python_orcid:
+      python-orcid:
         condition: service_completed_successfully
     volumes:
       - ./pyextractdata/output/:/input
