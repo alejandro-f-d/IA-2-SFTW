@@ -3,6 +3,8 @@ from src.save.save import save_content
 from src.extract.extract_abstract import extract_abstract
 from src.extract.extract_ack import extract_ack
 from src.extract.extract_people import extract_people
+from src.extract.extract_title_doi import extract_title_doi 
+import json
 
 INPUT_DIR = os.getenv('INPUT_DIR', '/input') 
 OUTPUT_DIR = os.getenv('OUTPUT_DIR', '/output')
@@ -42,6 +44,14 @@ def main():
             save_content(people_data, save_path)
         else: 
             print(f"Fallo al generar los autores de: {filename}")
+        doi_data = extract_title_doi(xml_path)
+        if doi_data:
+            doi_file_name = filename.replace('.xml', '_doi.txt')
+            save_path = os.path.join(OUTPUT_DIR, doi_file_name)
+            texto_a_guardar = json.dumps(doi_data, ensure_ascii=False, indent=4)
+            save_content(texto_a_guardar, save_path)
+        else: 
+            print(f"Fallo al obtener el doi de: {filename}")
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,4 @@
-name: primera-practica-ia-software-abierto
+name: segunda-practica-ia-software-abierto
 services:
   grobid:
     container_name: grobid_ia_2
