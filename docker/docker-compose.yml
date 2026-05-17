@@ -69,6 +69,19 @@ services:
       ORCID_CLIENT_SECRET: ${ORCID_CLIENT_SECRET}
       CLIENT_URL: ${CLIENT_URL}
 
+  python-wikidata:
+    container_name: python_wikidata
+    build: ./pywikidata/
+    depends_on: 
+      python_orcid:
+        condition: service_completed_successfully
+    volumes:
+      - ./pyextractdata/output/:/input
+      - ./pywikidata/output:/output
+    networks:
+      - net_ia_practica_2
+
+
 
 
 
