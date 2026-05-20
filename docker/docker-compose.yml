@@ -92,13 +92,8 @@ services:
       - ./pyopenalex/output:/output
     networks:
       - net_ia_practica_2
-
-
-
-
-
-
-
+    environment:
+      OPENALEX_EMAIL: ${OPENALEX_EMAIL}
 networks:
   net_ia_practica_2:
     driver: bridge

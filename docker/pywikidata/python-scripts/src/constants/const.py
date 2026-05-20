@@ -30,3 +30,11 @@ SELECT (COUNT(?citante) AS ?numeroDeCitas) WHERE {{
   ?citante wdt:P2860 <{item_uri}>. 
 }}
 """
+
+WIKIDATA_OBTENER_DOI = """
+SELECT ?item  ?doi WHERE {
+  ?item wdt:P31 wd:Q13442814 ;
+        wdt:P1476 "{doi}"@en ; #?title ;
+        wdt:P356 ?doi .
+}
+"""
