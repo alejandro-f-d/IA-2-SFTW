@@ -81,6 +81,19 @@ services:
     networks:
       - net_ia_practica_2
 
+  python-openalex:
+    container_name: python_openalex
+    build: ./pyopenalex/
+    depends_on:
+      python-data:
+        condition: service_completed_successfully # Exit 0 del proceso de python-data.
+    volumes:
+      - ./pyextractdata/output/:/input
+      - ./pyopenalex/output:/output
+    networks:
+      - net_ia_practica_2
+
+
 
 
 
