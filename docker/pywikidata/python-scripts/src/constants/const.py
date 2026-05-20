@@ -32,9 +32,9 @@ SELECT (COUNT(?citante) AS ?numeroDeCitas) WHERE {{
 """
 
 WIKIDATA_OBTENER_DOI = """
-SELECT ?item  ?doi WHERE {
+SELECT ?item ?doi WHERE {{
   ?item wdt:P31 wd:Q13442814 ;
-        wdt:P1476 "{doi}"@en ; #?title ;
+        wdt:P1476 "{doi}"@en ;
         wdt:P356 ?doi .
-}
+}}
 """
