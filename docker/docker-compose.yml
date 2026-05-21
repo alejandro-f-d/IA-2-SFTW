@@ -81,6 +81,17 @@ services:
     networks:
       - net_ia_practica_2
 
+  python-clustering:
+    container_name: python_clustering
+    build: ./pyclustering/
+    depends_on:
+      python-data:
+        condition: service_completed_successfully
+    volumes:
+      - ./pyextractdata/output:/input
+      - ./pyclustering/output:/output
+    networks:
+      - net_ia_practica_2
 
 
 
