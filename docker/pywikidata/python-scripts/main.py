@@ -1,4 +1,4 @@
-from src.execute_query.executor import atacar_wikidata_doi
+from src.execute_query.executor import atacar_wikidata_doi, atacar_wikidata_name
 import os 
 import json
 
@@ -31,15 +31,16 @@ def main():
             # Ejecutar la estructura de querys en base al doi.
             resultado = atacar_wikidata_doi(doi)
         elif titulo is not None:
-            continue
+            print(f"Buscando por título: {titulo}")
             # Ejecutar las querys en base al título.
+            resultado = atacar_wikidata_name(titulo)
         else: 
             print(f"El {filename} no tiene título ni DOI.")
             continue
 
         output_filename = filename.replace('_doi.txt', '_processed_wikidata.json')
         output_path = os.path.join(OUTPUT_DIR, output_filename)
-        if resultado and resultado != None:
+        if resultado:
             with open(output_path, 'w', encoding='utf-8') as f_out:
                 json.dump(resultado, f_out, indent=4, ensure_ascii=False)
         print(f"Información procesada para {filename}")

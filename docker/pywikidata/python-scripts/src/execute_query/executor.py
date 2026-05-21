@@ -1,5 +1,5 @@
 import requests
-from src.constants.const import URL_WIKIDATA, URL_SCHOOLAR, WIKIDATA_DOI_QUERY_TEMPLATE, WIKIDATA_CITAS
+from src.constants.const import URL_WIKIDATA, URL_SCHOOLAR, WIKIDATA_DOI_QUERY_TEMPLATE, WIKIDATA_CITAS, WIKIDATA_OBTENER_DOI 
 
 def atacar_wikidata(query, url):
     url_exec = None
@@ -73,3 +73,25 @@ def atacar_wikidata_doi(doi_buscar):
 
     print(f"El resultado final {resultado_final}")
     return resultado_final
+
+def atacar_wikidata_name(name):
+    query_wikidata_ejecutar_nombre = WIKIDATA_OBTENER_DOI.format(doi=name) 
+    resultado_doi = atacar_wikidata(query_wikidata_ejecutar_nombre, url=2)
+
+    if not resultado_doi:
+        return None
+
+    bindings = resultado_doi.get('results', {}).get('bindings', [])
+    
+    if not bindings:
+        print(f"No se encontraron resultados para el título: {name} (Filtro: @en)")
+        return None
+
+    coincidencia = bindings[0]
+    doi = coincidencia.get('doi', {}).get('value', None)
+
+    if doi:
+        print(f"DOI localizado: {doi}. Extrayendo metadatos completos...")
+        return atacar_wikidata_doi(doi)
+    
+    return None
