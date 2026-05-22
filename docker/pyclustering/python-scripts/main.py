@@ -4,8 +4,8 @@ from src.clustering.clustering import *
 from src.save.save_results import *
 
 
-INPUT_DIR = os.getenv('INPUT_DIR', '../../pyextractdata/output')
-OUTPUT_DIR = os.getenv('OUTPUT_DIR', '../output')
+INPUT_DIR = os.getenv('INPUT_DIR', '/input')
+OUTPUT_DIR = os.getenv('OUTPUT_DIR', '/output')
 
 
 def main():
@@ -13,7 +13,7 @@ def main():
     names, docs = load_abstracts(INPUT_DIR)
 
     if len(docs) == 0:
-        raise ValueError("No se encontraron abstracts.")
+        raise ValueError("No se encontraron abstracts en el directorio: " + INPUT_DIR)
 
     embeddings = get_embeddings(docs)
 
