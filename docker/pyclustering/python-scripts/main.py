@@ -22,28 +22,18 @@ def main():
         names
     )
 
-    topic_model, topics, probs = run_bertopic(docs)
+    topic_model, topics, probs, topic_distr = run_bertopic(docs)
 
     topic_results = extract_topics(topic_model, docs, topics)
-
     paper_topics = build_paper_topics(names, topics)
+    paper_topic_distribution = build_paper_topic_distribution(names, topic_distr, topic_model)
 
-    save_json(
-        similarity_results,
-        os.path.join(OUTPUT_DIR, "similarity.json")
-    )
+    save_json(similarity_results,       os.path.join(OUTPUT_DIR, "similarity.json"))
+    save_json(topic_results,            os.path.join(OUTPUT_DIR, "topics.json"))
+    save_json(paper_topics,             os.path.join(OUTPUT_DIR, "paper_topics.json"))
+    save_json(paper_topic_distribution, os.path.join(OUTPUT_DIR, "paper_topic_distribution.json"))
 
-    save_json(
-        topic_results,
-        os.path.join(OUTPUT_DIR, "topics.json")
-    )
-
-    save_json(
-        paper_topics,
-        os.path.join(OUTPUT_DIR, "paper_topics.json")
-    )
-
-    print("\nSimilarity scores generated")
+    print("Similarity scores generated")
     print("Topics generated")
 
 

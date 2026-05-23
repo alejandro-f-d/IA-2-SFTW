@@ -64,16 +64,16 @@ def run_bertopic(docs):
     embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
     umap_model = UMAP(
-        n_neighbors=5,        
-        n_components=3,       
+        n_neighbors=5,
+        n_components=3,
         min_dist=0.0,
         metric="cosine",
         random_state=42
     )
 
     hdbscan_model = HDBSCAN(
-        min_cluster_size=2,   
-        min_samples=1,        
+        min_cluster_size=2,
+        min_samples=1,
         metric="euclidean",
         cluster_selection_method="eom",
         prediction_data=True
@@ -87,12 +87,32 @@ def run_bertopic(docs):
         hdbscan_model=hdbscan_model,
         ctfidf_model=ctfidf_model,
         nr_topics="auto",
+        calculate_probabilities=True,
         verbose=True
     )
 
     topics, probs = topic_model.fit_transform(docs)
 
-    return topic_model, topics, probs
+    topic_distr, _ = topic_model.approximate_distribution(docs)
+
+    return topic_model, topics, probs, topic_distr
+
+def build_paper_topic_distribution(names, topic_distr, topic_model):
+    topics_info = topic_model.get_topic_info()
+    valid_topic_ids = [
+        int(t) for t in topics_info["Topic"] if t != -1
+    ]
+
+    results = {}
+
+    for name, dist in zip(names, topic_distr):
+        results[name] = {
+            str(topic_id): round(float(dist[topic_id]) * 100, 2)
+            for topic_id in valid_topic_ids
+            if topic_id < len(dist)
+        }
+
+    return results
 
 
 
@@ -105,12 +125,10 @@ def extract_topics(topic_model, docs, topics):
         if topic_id == -1:
             continue
 
-        # Reunir todos los docs de este topic
         cluster_docs = " ".join([
             doc for doc, t in zip(docs, topics) if t == topic_id
         ])
 
-        # Extraer keyphrase más representativa
         keyphrases = kw_model.extract_keywords(
             cluster_docs,
             keyphrase_ngram_range=(2, 4),
