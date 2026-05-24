@@ -2,7 +2,7 @@ from rdflib import Graph, Literal, URIRef, Namespace
 from rdflib.namespace import RDF, RDFS
 
 # Namespace base para todas las URIs del proyecto
-EX = Namespace("http://example.org/")
+EX = Namespace("http://ia-practica-2.org/")
 
 def build_kg(papers_data):
     
@@ -47,5 +47,5 @@ def build_kg(papers_data):
     return g
 
 def save_kg(g, output_path):
-    g.serialize(output_path, format="turtle")
+    g.serialize(output_path, format="json-ld")
     print(f"KG guardado en: {output_path}")
