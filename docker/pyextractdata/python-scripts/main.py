@@ -81,7 +81,7 @@ def main():
     # Modificación: generar y guardar el KG
     if papers_data:
         g = build_kg(papers_data)
-        save_kg(g, os.path.join(OUTPUT_DIR, "knowledge_graph.ttl"))
+        save_kg(g, os.path.join(OUTPUT_DIR, "knowledge_graph.json"))
 
 if __name__ == "__main__":
     main()
