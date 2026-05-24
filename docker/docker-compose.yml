@@ -106,8 +106,24 @@ services:
       - ./pyopenalex/output:/output
     networks:
       - net_ia_practica_2
+  fuseki:
+    image: stain/jena-fuseki:5.1.0
+    container_name: fuseki
+    ports:
+      - "${FUSEKI_PORT}:3030"
+    environment:
+      - ADMIN_PASSWORD=${FUSEKI_PASSWORD}
+    volumes:
+      - fuseki-data:/fuseki
+    networks:
+      - net_ia_practica_2
+    restart: unless-stopped
+
 
 
 networks:
   net_ia_practica_2:
     driver: bridge
+volumes:
+  fuseki-data:
+    driver: local
