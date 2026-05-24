@@ -106,6 +106,33 @@ services:
       - ./pyopenalex/output:/output
     networks:
       - net_ia_practica_2
+  
+  python-kg:
+    container_name: python_kg
+    build: ./pykg/
+    depends_on:
+      python-orcid:
+        condition: service_completed_successfully
+      python-wikidata:
+        condition: service_completed_successfully
+      python-openalex:
+        condition: service_completed_successfully
+    volumes:
+      - ./pyextractdata/output:/input/extract
+      - ./pyclustering/output:/input/clustering
+      - ./pyorcid/output:/input/orcid
+      - ./pywikidata/output:/input/wikidata
+      - ./pyopenalex/output:/input/openalex
+      - ./pykg/output:/output
+      - ./ontology:/ontology
+    environment:
+      - INPUT_DIR=/input
+      - OUTPUT_DIR=/output
+      - ONTOLOGY_PATH=/ontology/citation_ontology.ttl
+    networks:
+      - net_ia_practica_2
+
+
   fuseki:
     image: stain/jena-fuseki:5.1.0
     container_name: fuseki

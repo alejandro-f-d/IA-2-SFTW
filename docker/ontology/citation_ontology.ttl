@@ -1,0 +1,282 @@
+@prefix ns:   <http://example.org/citation#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+
+# ─────────────────────────────────────────────
+#  Ontology Metadata
+# ─────────────────────────────────────────────
+
+<http://example.org/citation>
+    a owl:Ontology ;
+    dc:title        "Citation Ontology" ;
+    dc:creator      "Grupo 3" ;
+    owl:versionInfo "1.0.2" .
+
+
+# ─────────────────────────────────────────────
+#  Classes
+# ─────────────────────────────────────────────
+
+ns:Paper
+    a owl:Class ;
+    rdfs:label "Paper" .
+
+ns:TopicAssignment
+    a owl:Class ;
+    rdfs:label   "Topic Assignment" ;
+    rdfs:comment "Clase intermedia de la relación n-aria entre Paper y Topic. Almacena la probabilidad de que un paper pertenezca a un topic concreto." .
+
+ns:Topic
+    a owl:Class ;
+    rdfs:label "Topic" .
+
+ns:Person
+    a owl:Class ;
+    rdfs:label "Person" .
+
+ns:Organization
+    a owl:Class ;
+    rdfs:label "Organization" .
+
+ns:SimilarityStatement
+    a owl:Class ;
+    rdfs:label "Similarity Statement" .
+
+ns:Project
+    a owl:Class ;
+    rdfs:label "Project" .
+
+
+# ─────────────────────────────────────────────
+#  Object Properties
+# ─────────────────────────────────────────────
+
+# Relación n-aria Paper → Topic (paso 1: paper a la clase intermedia)
+ns:belongs_to_topic
+    a owl:ObjectProperty ;
+    rdfs:label  "belongs to topic" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  ns:TopicAssignment .
+
+# Relación n-aria Paper → Topic (paso 2: clase intermedia al topic)
+ns:assignedTopic
+    a owl:ObjectProperty ;
+    rdfs:label  "assigned topic" ;
+    rdfs:domain ns:TopicAssignment ;
+    rdfs:range  ns:Topic .
+
+# Paper → Person
+ns:hasAuthor
+    a owl:ObjectProperty ;
+    rdfs:label  "has author" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  ns:Person .
+
+# Paper → Organization o Person (reconocimiento institucional y personal)
+ns:acknowledges
+    a owl:ObjectProperty ;
+    rdfs:label  "acknowledges" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  [ a owl:Class ; owl:unionOf ( ns:Organization ns:Person ) ] .
+
+# Paper → SimilarityStatement
+ns:similar_to
+    a owl:ObjectProperty ;
+    rdfs:label  "similar to" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  ns:SimilarityStatement .
+
+# Paper → Paper
+ns:cites
+    a owl:ObjectProperty ;
+    rdfs:label  "cites" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  ns:Paper .
+
+# Person → Organization
+ns:affiliated_with
+    a owl:ObjectProperty ;
+    rdfs:label  "affiliated with" ;
+    rdfs:domain ns:Person ;
+    rdfs:range  ns:Organization .
+
+# Organization → Project
+ns:fundedBy
+    a owl:ObjectProperty ;
+    rdfs:label  "funded by" ;
+    rdfs:domain ns:Organization ;
+    rdfs:range  ns:Project .
+
+# Paper → Project
+ns:isFundedBy
+    a owl:ObjectProperty ;
+    rdfs:label  "is funded by" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  ns:Project .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:Paper
+# ─────────────────────────────────────────────
+
+ns:title
+    a owl:DatatypeProperty ;
+    rdfs:label  "title" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:string .
+
+ns:abstract
+    a owl:DatatypeProperty ;
+    rdfs:label  "abstract" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:string .
+
+ns:doi
+    a owl:DatatypeProperty ;
+    rdfs:label  "doi" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:string .
+
+ns:publication_year
+    a owl:DatatypeProperty ;
+    rdfs:label  "publication year" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:gYear .
+
+ns:citation_count
+    a owl:DatatypeProperty ;
+    rdfs:label  "citation count" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:integer .
+
+ns:keyword
+    a owl:DatatypeProperty ;
+    rdfs:label  "keyword" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:string .
+
+ns:open_alex_id
+    a owl:DatatypeProperty ;
+    rdfs:label  "OpenAlex ID" ;
+    rdfs:domain ns:Paper ;
+    rdfs:range  xsd:string .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:TopicAssignment
+# ─────────────────────────────────────────────
+
+ns:probability
+    a owl:DatatypeProperty ;
+    rdfs:label   "probability" ;
+    rdfs:comment "Probabilidad de que el paper pertenezca al topic (valor entre 0.0 y 1.0)." ;
+    rdfs:domain  ns:TopicAssignment ;
+    rdfs:range   xsd:float .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:Topic
+# ─────────────────────────────────────────────
+
+ns:topicId
+    a owl:DatatypeProperty ;
+    rdfs:label  "topic ID" ;
+    rdfs:domain ns:Topic ;
+    rdfs:range  xsd:integer .
+
+ns:topicLabel
+    a owl:DatatypeProperty ;
+    rdfs:label  "topic label" ;
+    rdfs:domain ns:Topic ;
+    rdfs:range  xsd:string .
+
+# Propiedad repetible: un topic tiene múltiples palabras representativas
+ns:topicWord
+    a owl:DatatypeProperty ;
+    rdfs:label   "topic word" ;
+    rdfs:comment "Palabra representativa del topic. Se declaran múltiples triples para el mismo topic (una por palabra)." ;
+    rdfs:domain  ns:Topic ;
+    rdfs:range   xsd:string .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:Person
+# ─────────────────────────────────────────────
+
+ns:name
+    a owl:DatatypeProperty ;
+    rdfs:label  "name" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ns:Person ns:Organization ) ] ;
+    rdfs:range  xsd:string .
+
+ns:orcid
+    a owl:DatatypeProperty ;
+    rdfs:label  "ORCID" ;
+    rdfs:domain ns:Person ;
+    rdfs:range  xsd:string .
+
+ns:wikidata_qid
+    a owl:DatatypeProperty ;
+    rdfs:label  "Wikidata QID" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ns:Person ns:Organization ) ] ;
+    rdfs:range  xsd:string .
+
+ns:email
+    a owl:DatatypeProperty ;
+    rdfs:label  "email" ;
+    rdfs:domain ns:Person ;
+    rdfs:range  xsd:string .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:Organization
+# ─────────────────────────────────────────────
+
+ns:rorId
+    a owl:DatatypeProperty ;
+    rdfs:label  "ROR ID" ;
+    rdfs:domain ns:Organization ;
+    rdfs:range  xsd:string .
+
+ns:country
+    a owl:DatatypeProperty ;
+    rdfs:label  "country" ;
+    rdfs:domain ns:Organization ;
+    rdfs:range  xsd:string .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:SimilarityStatement
+# ─────────────────────────────────────────────
+
+ns:similarityScore
+    a owl:DatatypeProperty ;
+    rdfs:label  "similarity score" ;
+    rdfs:domain ns:SimilarityStatement ;
+    rdfs:range  xsd:float .
+
+
+# ─────────────────────────────────────────────
+#  Data Properties — ns:Project
+# ─────────────────────────────────────────────
+
+ns:grantId
+    a owl:DatatypeProperty ;
+    rdfs:label  "grant ID" ;
+    rdfs:domain ns:Project ;
+    rdfs:range  xsd:string .
+
+ns:startDate
+    a owl:DatatypeProperty ;
+    rdfs:label  "start date" ;
+    rdfs:domain ns:Project ;
+    rdfs:range  xsd:date .
+
+ns:endDate
+    a owl:DatatypeProperty ;
+    rdfs:label  "end date" ;
+    rdfs:domain ns:Project ;
+    rdfs:range  xsd:date .

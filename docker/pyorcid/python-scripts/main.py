@@ -42,7 +42,7 @@ def main():
                                     "empleo": [asdict(emp) for emp in informacion_empresa],
                                     "publicaciones": [asdict(pub) for pub in informacion_publicaciones]
                                 }
-                                output_filename = filename.replace('_people.txt', '_processed_orcid.json')
+                                output_filename = filename.replace('_people.txt', f'_{orcid}_processed_orcid.json')
                                 output_path = os.path.join(OUTPUT_DIR, output_filename)
                                 with open(output_path, 'w', encoding='utf-8') as f_out:
                                     json.dump(resultado_investigador, f_out, indent=4, ensure_ascii=False)
