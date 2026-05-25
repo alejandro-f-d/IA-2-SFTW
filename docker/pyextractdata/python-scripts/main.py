@@ -10,9 +10,6 @@ from src.save.save_kg import build_kg, save_kg
 from src.ner.ner_extractor import extract_entities
 
 
-# Para ejecución sin Docker descomentar las líneas siguientes y comentar las otras:
-# INPUT_DIR = os.getenv('INPUT_DIR', '../../pygrobid/output')
-# OUTPUT_DIR = os.getenv('OUTPUT_DIR', '../output')
 
 
 INPUT_DIR = os.getenv('INPUT_DIR', '/input')
