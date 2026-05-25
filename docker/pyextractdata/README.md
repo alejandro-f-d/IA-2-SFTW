@@ -68,6 +68,6 @@ CUDA_VISIBLE_DEVICES="" python main.py
 ### Ejecución test:
 Una vez se tenga el entorno con las dependencias iremos a la carpeta `./python-scripts/tests/` y ejecutaremos:
 ```bash
-de ./python-scripts/tests/
+cd ./python-scripts/tests/
 pytest .
 ```

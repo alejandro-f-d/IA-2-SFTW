@@ -62,7 +62,6 @@ cd ./python-scripts/
 export INPUT_DIR=../../pyextractdata/output
 export OUTPUT_DIR=../output
 python main.py
-python main.py
 ```
 | Ruta en el contenedor | Descripción |
 |---|---|
@@ -71,6 +70,6 @@ python main.py
 ### Ejecución test:
 Una vez se tenga el entorno con las dependencias iremos a la carpeta `./python-scripts/tests/` y ejecutaremos:
 ```bash
-de ./python-scripts/tests/
+cd ./python-scripts/tests/
 pytest .
 ```
