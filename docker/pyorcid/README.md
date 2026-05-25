@@ -68,3 +68,37 @@ El fichero de entrada es un array JSON con objetos `{ "orcid": "…", "nombre_co
 | Ningún autor con datos en el paper | No se genera fichero de salida, continúa con el siguiente |
 | Cualquier otra excepción al leer el fichero | Log del error, continúa con el siguiente fichero |
 
+
+## Ejecución en nativo y test:
+
+### Ejecución nativa:
+En caso de querer la ejecución en nativo se deben establecer diferentes variables de entorno (p.e. con un export). Además de instalar los requirements presentes en `./requirements.txt`.
+```bash
+# Creación del entorno:
+python -m venv .venv
+# Activación del entorno:
+source .venv/bin/activate
+# Instalación de los requirements:
+pip install -r requirements.txt
+# Movimiento a la carpeta del main
+cd ./python-scripts/
+# Creación de variables de entorno:
+export INPUT_DIR=../../pyextractdata/output
+export OUTPUT_DIR=../output
+python main.py
+```
+| Ruta en el contenedor | Descripción |
+|---|---|
+| `INPUT_DIR` | Directorio con los _doi.txt a procesar |
+| `OUTPUT_DIR` | Directorio donde se guardan los output generados |
+| `CLIENT_ID` | Id del cliente de la API de ORCID |
+| `CLIENT_SECRET` | Token del cliente de ORCID |
+| `CLIENT_URL` | URL donde se ataca para obtener la información |
+### Ejecución test:
+Al igual que con la ejecución normal debemos establecer el valor de las variables de entorno. 
+Una vez se tenga el entorno con las dependencias iremos a la carpeta `./python-scripts/tests/` y ejecutaremos:
+```bash
+cd ./python-scripts/tests/
+pytest .
+```
+
