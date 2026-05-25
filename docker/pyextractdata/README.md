@@ -56,6 +56,12 @@ g.serialize(output_path, format="json-ld")
 ```
 El contenido es equivalente en ambos formatos, solo cambia la representación. En el repositorio, está con formato json. 
 
+### Ejecución NER:
+Una vez se tenga el entorno con las dependencias iremos a la carpeta `./python-scripts` y ejecutaremos:
+```bash
+cd ./python-scripts/
+python main.py 
+```
 
 ## Variables de entorno:
 
