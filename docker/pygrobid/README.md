@@ -32,7 +32,21 @@ Para cada PDF encontrado en la ruta de input, el módulo realiza una llamada a G
 - El directorio `/output` se crea automáticamente si no existe.
 
 ## Ejecución en nativo: 
-En caso de querer la ejecución en nativo se deben establecer diferentes variables de entorno (p.e. con un export). 
+En caso de querer la ejecución en nativo se deben establecer diferentes variables de entorno (p.e. con un export). Además de instalar los requirements presentes en `./requirements.txt`.
+```bash
+# Creación del entorno:
+python -m venv .venv
+# Activación del entorno:
+source .venv/bin/activate
+# Instalación de los requirements:
+pip install -r requirements.txt
+# Movimiento a la carpeta del main
+cd ./python-scripts/
+# Creación de variables de entorno:
+export GROBID_URL=http://192.168.68.68:8071/api/processFulltextDocument
+export INPUT_DIR=../input
+export OUTPUT_DIR=../output
+```
 | Ruta en el contenedor | Descripción |
 |---|---|
 | `INPUT_DIR` | Directorio con los PDFs a procesar |
