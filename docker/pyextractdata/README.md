@@ -40,11 +40,21 @@ Se evaluaron cuatro modelos antes de seleccionar el definitivo:
 | `elastic/distilbert-base-uncased-finetuned-conll03-english` | ~250MB | Peor resultado global |
 
 ### Salida
-El resultado se guarda en `output/knowledge_graph.json`,
+El resultado se guarda en `output/knowledge_graph.ttl` en formato RDF/Turtle,
 con las siguientes relaciones:
 - `ex:acknowledges` → paper hacia persona u organización
 - `ex:hasProject` → paper hacia ID de proyecto
 
+El KG también puede exportarse en formato **JSON-LD** cambiando el parámetro 
+`format` en `save_kg.py`:
+```python
+# Turtle (por defecto)
+g.serialize(output_path, format="turtle")
+
+# JSON-LD
+g.serialize(output_path, format="json-ld")
+```
+El contenido es equivalente en ambos formatos, solo cambia la representación. En el repositorio, está con formato json. 
 
 
 ## Variables de entorno:
