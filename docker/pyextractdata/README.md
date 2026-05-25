@@ -21,13 +21,14 @@ de los papers se ha utilizado el modelo
 - **Organizaciones** (ORG): instituciones y entidades financiadoras
 - **Lugares** (LOC): países y regiones mencionados
 - **IDs de proyectos**: códigos de financiación detectados mediante 
-expresiones regulares (ej. `BK20200113`, `#41871214`)
+expresiones regulares 
 
 ### Decisiones de diseño
-- Se filtran entidades con confianza inferior al 85%
+- Se filtran entidades con confianza inferior al 85%: Se filtran entidades con confianza inferior al 85% (0.85) para evitar 
+falsos positivos. Si fuera más alto, el modelo descartaría muchas entindades volviéndose demasiado estricto; y por el contrario, si es muy bajo, filtra entidades dudosas.
 - Se eliminan acrónimos duplicados.
 - Los IDs de proyectos no son detectados por el modelo de forma nativa, 
-por lo que se añadió un extractor basado en expresiones regulares
+por lo que se añadió un extractor basado en expresiones regulares. Es posible que no todos los tipos de id sean reconocidos. 
 
 ### Modelos evaluados
 Se evaluaron cuatro modelos antes de seleccionar el definitivo:
