@@ -8,10 +8,8 @@ from src.extract_links import extract_links
 from src.generate_document import generate_links_report 
 
 
-INPUT_DIR = Path("/input")
-OUTPUT_DIR = Path("/output")
-
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+INPUT_DIR = os.getenv("INPUT_DIR", "/input")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", "/output")
 
 CANTIDAD_PALABRAS = int(os.getenv("CANTIDAD_PALABRAS", 2))
 

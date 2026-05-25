@@ -63,9 +63,6 @@ Para obtener estas credenciales es necesario registrar una aplicación en [https
 GROBID_EXTERNAL_PORT=8070
 FUSEKI_PORT=3030
 
-# Pipeline
-CANTIDAD_PALABRAS=100
-
 # ORCID
 ORCID_CLIENT_ID=APP-XXXXXXXXXXXXXXXX
 ORCID_CLIENT_SECRET=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -85,7 +82,7 @@ Todos los servicios se comunican a través de la red bridge `net_ia_practica_2`.
 Los datos fluyen entre servicios mediante **bind mounts** en directorios locales:
 
 ```
-./pygrobid/input/          → input de python-xml      (PDFs originales)
+./pygrobid/input/          → input de  los PDFs      
 ./pygrobid/output/         → output de python-xml      / input de python-data
 ./pyextractdata/output/    → output de python-data     / input de python-clustering, python-orcid, python-wikidata, python-openalex, python-kg
 ./pyclustering/output/     → output de python-clustering / input de python-kg
@@ -121,6 +118,9 @@ docker compose down -v
 ```
 Una vez ha terminado el flujo de los contenedores se debe subir el knowledge graph a Fuseki. Los pasos están explicados en ![]()
 
+En caso de querer ejecución fuera de contenedores docker seguir los readmes de ejecución de cada uno:
+- [pygrobid](./pygrobid/README.md)
+
 
 ## Servicios expuestos:
 
@@ -131,3 +131,6 @@ Una vez ha terminado el flujo de los contenedores se debe subir el knowledge gra
 | Fuseki | `http://localhost:${FUSEKI_PORT}` | Panel de administración |
 | Fuseki SPARQL | `http://localhost:${FUSEKI_PORT}/dataset/sparql` | Endpoint SPARQL |
 
+
+# Más información:
+Se puede encontrar más información en cada uno de los README.md de cada carpeta de ejecución. 
