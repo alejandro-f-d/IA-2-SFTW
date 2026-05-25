@@ -11,6 +11,40 @@ Este módulo recibe como input los XML generados por `pygrobid` y extrae la info
 
 Cada extracción es autónoma e independiente: si una falla para un documento concreto, se notifica por consola y el proceso continúa con las demás extracciones del mismo fichero.
 
+## Name Entity Recognition (NER)
+Para la extracción de entidades nombradas de la sección de agradecimientos 
+de los papers se ha utilizado el modelo 
+**jean-baptiste/roberta-large-ner-english** de HuggingFace.
+
+### Entidades detectadas
+- **Personas** (PER): autores y colaboradores mencionados
+- **Organizaciones** (ORG): instituciones y entidades financiadoras
+- **Lugares** (LOC): países y regiones mencionados
+- **IDs de proyectos**: códigos de financiación detectados mediante 
+expresiones regulares (ej. `BK20200113`, `#41871214`)
+
+### Decisiones de diseño
+- Se filtran entidades con confianza inferior al 85%
+- Se eliminan acrónimos duplicados.
+- Los IDs de proyectos no son detectados por el modelo de forma nativa, 
+por lo que se añadió un extractor basado en expresiones regulares
+
+### Modelos evaluados
+Se evaluaron cuatro modelos antes de seleccionar el definitivo:
+
+| Modelo | Tamaño | Resultado |
+|--------|--------|-----------|
+| `jean-baptiste/roberta-large-ner-english` | ~1.4GB | Mejor resultado global |
+| `dslim/bert-base-NER` | ~400MB | Bueno con org. largas, falla con tokens complejos |
+| `dslim/bert-large-cased-finetuned-conll03-english` | ~1.2GB | Fragmentación de tokens |
+| `elastic/distilbert-base-uncased-finetuned-conll03-english` | ~250MB | Peor resultado global |
+
+### Salida
+El resultado se guarda en `output/knowledge_graph.json`,
+con las siguientes relaciones:
+- `ex:acknowledges` → paper hacia persona u organización
+- `ex:hasProject` → paper hacia ID de proyecto
+
 
 
 ## Variables de entorno:
