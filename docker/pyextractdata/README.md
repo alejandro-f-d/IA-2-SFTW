@@ -48,7 +48,7 @@ con las siguientes relaciones:
 El KG también puede exportarse en formato **JSON-LD** cambiando el parámetro 
 `format` en `save_kg.py`:
 ```python
-# Turtle (por defecto)
+# Turtle 
 g.serialize(output_path, format="turtle")
 
 # JSON-LD
