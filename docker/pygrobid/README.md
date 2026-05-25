@@ -46,6 +46,7 @@ cd ./python-scripts/
 export GROBID_URL=http://192.168.68.68:8071/api/processFulltextDocument
 export INPUT_DIR=../input
 export OUTPUT_DIR=../output
+python main.py
 ```
 | Ruta en el contenedor | Descripción |
 |---|---|

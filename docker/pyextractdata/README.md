@@ -57,6 +57,9 @@ cd ./python-scripts/
 # Creación de variables de entorno:
 export INPUT_DIR=../../pygrobid/output
 export OUTPUT_DIR=../output
+python main.py
+# En caso de tener error de CUDA OUT OF MEMORY:
+CUDA_VISIBLE_DEVICES="" python main.py
 ```
 | Ruta en el contenedor | Descripción |
 |---|---|
