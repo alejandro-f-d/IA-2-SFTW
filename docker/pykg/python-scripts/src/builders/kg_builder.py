@@ -26,10 +26,9 @@ def build_kg(papers: dict, globals_: dict, ontology_path: Optional[str] = None) 
     elif ontology_path:
         print(f"  [WARN] Ontología no encontrada en: {ontology_path}")
 
-    ner_graph = globals_.get("ner_graph")
-    if ner_graph:
-        for triple in ner_graph:
-            g.add(triple)
+    ner_entities = globals_.get("ner_graph") or []
+    if ner_entities:
+        _build_ner(g, ner_entities)
 
     for paper_id, sources in papers.items():
         print(f"  Construyendo triples para: {paper_id}")
@@ -202,7 +201,6 @@ def _oa_local(oa_id: str) -> str:
     return oa_id.rstrip("/").split("/")[-1]
 
 def _find_paper_topic(paper_id: str, paper_topics: dict):
-    """Busca el topic_id para un paper_id, tolerando el sufijo _abstract."""
     if paper_id in paper_topics:
         return paper_topics[paper_id]
     key_abstract = f"{paper_id}_abstract"
@@ -214,3 +212,44 @@ def _add_literal(g: Graph, subject: URIRef, predicate: URIRef,
                  value, datatype) -> None:
     if value is not None and value != "":
         g.add((subject, predicate, Literal(value, datatype=datatype)))
+
+_NER_TYPE_MAP = {
+    "http://ia-practica-2.org/Paper":        NS.Paper,
+    "http://ia-practica-2.org/Person":       NS.Person,
+    "http://ia-practica-2.org/Organization": NS.Organization,
+    "http://ia-practica-2.org/Project":      NS.Project,
+    "http://ia-practica-2.org/Location":     None,  
+}
+
+_NER_PROP_MAP = {
+    "http://ia-practica-2.org/acknowledges": NS.acknowledges,
+    "http://ia-practica-2.org/hasProject":   NS.isFundedBy,
+    "http://www.w3.org/2000/01/rdf-schema#label": RDFS.label,
+}
+
+
+def _build_ner(g: Graph, entities: list) -> None:
+    for entity in entities:
+        entity_id  = entity.get("@id")
+        entity_types = entity.get("@type") or []
+        if not entity_id:
+            continue
+
+        subject = URIRef(entity_id)
+
+        for t in entity_types:
+            ns_class = _NER_TYPE_MAP.get(t)
+            if ns_class:
+                g.add((subject, RDF.type, ns_class))
+
+        for json_prop, values in entity.items():
+            if json_prop in ("@id", "@type"):
+                continue
+            onto_prop = _NER_PROP_MAP.get(json_prop)
+            if not onto_prop:
+                continue
+            for val in (values or []):
+                if "@id" in val:
+                    g.add((subject, onto_prop, URIRef(val["@id"])))
+                elif "@value" in val:
+                    g.add((subject, onto_prop, Literal(val["@value"], datatype=XSD.string)))

@@ -27,14 +27,10 @@ def load_all(input_dir: str) -> dict:
         for f in os.listdir(orcid_dir):
             if not f.endswith("_processed_orcid.json"):
                 continue
-            base = f.replace("_processed_orcid.json", "")
-            if len(base) > 19 and base[-19:].count("-") == 3:
-                paper_id = base[:-20]
-            else:
-                paper_id = base
+            paper_id = f.replace("_processed_orcid.json", "")
             orcid_data = _load_json(os.path.join(orcid_dir, f))
             if orcid_data:
-                _get_or_create(papers, paper_id)["orcid_authors"].append(orcid_data)
+                _get_or_create(papers, paper_id)["orcid_authors"] = orcid_data.get("autores") or []
 
     if os.path.exists(wikidata_dir):
         for f in os.listdir(wikidata_dir):
@@ -55,18 +51,18 @@ def load_all(input_dir: str) -> dict:
 
 def load_globals(input_dir: str) -> dict:
     result = {
-        "ner_graph":    None,
+        "ner_graph":    [],
         "paper_topics": {},
         "topics":       {},
         "similarity":   {},
     }
 
-    ttl_path = os.path.join(input_dir, "extract", "knowledge_graph.ttl")
-    if os.path.exists(ttl_path):
-        g = Graph()
-        g.parse(ttl_path, format="turtle")
-        result["ner_graph"] = g
-        print(f"  knowledge_graph.ttl cargado: {len(g)} triples")
+    kg_path = os.path.join(input_dir, "extract", "knowledge_graph.json")
+    if os.path.exists(kg_path):
+        data = _load_json(kg_path)
+        if data:
+            result["ner_graph"] = data
+            print(f"  knowledge_graph.json cargado: {len(data)} entidades")
 
     clustering_dir = os.path.join(input_dir, "clustering")
     for key, filename in [
