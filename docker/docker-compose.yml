@@ -129,6 +129,7 @@ services:
       - INPUT_DIR=/input
       - OUTPUT_DIR=/output
       - ONTOLOGY_PATH=/ontology/citation_ontology.ttl
+      - CLUSTERING_DIR=/input/clustering #VE Clustering
     networks:
       - net_ia_practica_2
 
