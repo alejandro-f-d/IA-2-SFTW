@@ -1,6 +1,6 @@
 # Docker Compose:
 
-En esta carpeta se sitúa el orquestador de los diferentes contenedores que componen la infraestructura del sistema de extracción y generación del grafo de conocimeitno.
+En esta carpeta se sitúa el orquestador de los diferentes contenedores que componen la infraestructura del sistema de extracción y generación del grafo de conocimiento.
 
 ## Servicios
 
