@@ -39,7 +39,7 @@ crate.description = (
     "and builds a Knowledge Graph in Turtle format."
 )
 crate.root_dataset["version"] = "1.0.0"
-crate.root_dataset["license"] = "https://creativecommons.org/licenses/by/4.0/"
+crate.root_dataset["license"] = "https://opensource.org/licenses/MIT"
 crate.root_dataset["datePublished"] = date.today().isoformat()
 crate.root_dataset["keywords"] = "food waste, knowledge graph, topic modeling, semantic similarity, BERTopic, Grobid, ORCID, Wikidata, OpenAlex, RDF, Turtle"
 
