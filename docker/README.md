@@ -119,9 +119,11 @@ docker compose down
 # Detener, eliminar contenedores y volúmenes
 docker compose down -v
 ```
-Una vez ha terminado el flujo de los contenedores se debe subir el knowledge graph a Fuseki. Los pasos están explicados en ![]()
 
 En caso de querer ejecución fuera de contenedores docker seguir los readmes de ejecución de cada uno de los diferentes dockers.
+
+## Construcción del fuseki:
+Para la creación del endpoint de Fuseki, se debe subir el fichero del knowledge graph al servicio fuseki para generar el endpoint.
 
 
 ## Servicios expuestos:
