@@ -3,54 +3,42 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.ner.ner_extractor import extract_entities
-# ── CORPUS DE VALIDACIÓN (anotado manualmente) ──────────────
+
+# INSTRUCCIONES 
+# Este script evalúa el rendimiento del modelo NER sobre un corpus
+# de validación anotado manualmente.
+#
+# Para usarlo con tus propios papers:
+# 1. Añade el texto de los agradecimientos en ack_texts:
+#    "paper_id": "texto de los agradecimientos..."
+#
+# 2. Anota manualmente las entidades correctas en gold_standard:
+#    "paper_id": {
+#        "organizaciones": ["Org 1", "Org 2"],
+#        "personas": ["Persona 1"],
+#        "lugares": ["País 1"],
+#        "project_ids": ["ID-123"]
+#    }
+#
+# 3. Ejecuta desde la carpeta python-scripts:
+#    python tests/evaluate_ner.py
+
+
+#  CORPUS DE VALIDACIÓN 
 gold_standard = {
     "paper0": {
         "organizaciones": [],
         "personas": [],
         "lugares": [],
         "project_ids": []
-    },
-    "paper2": {
-        "organizaciones": [],
-        "personas": [],
-        "lugares": [],
-        "project_ids": []
-    },
-    "paper3": {
-        "organizaciones": [],
-        "personas": [],
-        "lugares": [],
-        "project_ids": []
-    },
-    "paper5": {
-        "organizaciones": [],
-        "personas": [],
-        "lugares": [],
-        "project_ids": []
-    },
-    "paper7": {
-        "organizaciones": [],
-        "personas": [],
-        "lugares": [],
-        "project_ids": []
-    },
-    "paper9": {
-        "organizaciones": [],
-        "personas": [],
-        "lugares": [],
-        "project_ids": []
     }
+    # Añadir más papers aquí...
 }
 
-# ── TEXTOS DE LOS AGRADECIMIENTOS ───────────────────────────
+#  TEXTOS DE LOS AGRADECIMIENTOS 
 ack_texts = {
-    "paper1": "",
-    "paper2": "",
-    "paper3": "",
-    "paper4": "",
-    "paper5": "",
-    "paper6": ""
+    "paper0": ""
+    # Añadir más papers aquí...
 }
 
 def calculate_metrics(gold, predicted):
