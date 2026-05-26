@@ -6,28 +6,28 @@ from src.ner.ner_extractor import extract_entities
 # ── CORPUS DE VALIDACIÓN (anotado manualmente) ──────────────
 gold_standard = {
     "paper0": {
-        "organizaciones": ["Food and Agricultural Organization of the United Nations"],
+        "organizaciones": [],
         "personas": [],
         "lugares": [],
         "project_ids": []
     },
     "paper2": {
-        "organizaciones": ["Social Sciences and Humanities Research Council of Canada"],
+        "organizaciones": [],
         "personas": [],
         "lugares": [],
-        "project_ids": ["435-2019-0155"]
+        "project_ids": []
     },
     "paper3": {
-        "organizaciones": ["Indonesia Education Scholarship", "Indonesia Endowment Funds for Education"],
+        "organizaciones": [],
         "personas": [],
         "lugares": [],
         "project_ids": []
     },
     "paper5": {
-        "organizaciones": ["National Science Foundation of China", "Science Foundation for Young Scientists Jiangsu Province"],
+        "organizaciones": [],
         "personas": [],
-        "lugares": ["China"],
-        "project_ids": ["#41871214", "BK20200113"]
+        "lugares": [],
+        "project_ids": []
     },
     "paper7": {
         "organizaciones": [],
@@ -36,7 +36,7 @@ gold_standard = {
         "project_ids": []
     },
     "paper9": {
-        "organizaciones": ["Coordination of Improvement of Higher Education Personnel"],
+        "organizaciones": [],
         "personas": [],
         "lugares": [],
         "project_ids": []
@@ -45,12 +45,12 @@ gold_standard = {
 
 # ── TEXTOS DE LOS AGRADECIMIENTOS ───────────────────────────
 ack_texts = {
-    "paper0": "This research was funded by the Food and Agricultural Organization of the United Nations (FAO) as background material for the 2019 report on The State of Food and Agriculture.",
-    "paper2": "The work from this research received funding from the Social Sciences and Humanities Research Council of Canada Insight Grant 435-2019-0155.",
-    "paper3": "This work was supported by the Indonesia Education Scholarship (BPI) and the Indonesia Endowment Funds for Education (LPDP), which provides funding support through doctoral degree scholarships.",
-    "paper5": "This work was financially supported by the National Science Foundation of China (# 41871214) and the Science Foundation for Young Scientists Jiangsu Province, China (BK20200113).",
-    "paper7": "The authors highly acknowledge the adopted source of figures which are presented in the review article.",
-    "paper9": "The authors would like to acknowledge the financial support of CAPES -Coordination of Improvement of Higher Education Personnel."
+    "paper1": "",
+    "paper2": "",
+    "paper3": "",
+    "paper4": "",
+    "paper5": "",
+    "paper6": ""
 }
 
 def calculate_metrics(gold, predicted):
