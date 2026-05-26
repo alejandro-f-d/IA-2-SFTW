@@ -63,7 +63,37 @@ Una vez se tenga el entorno con las dependencias iremos a la carpeta `./python-s
 cd ./python-scripts/
 python main.py 
 ```
+### Evaluación del modelo NER
 
+Para evaluar el rendimiento del modelo se ha creado un corpus de validación 
+con las secciones de agradecimientos de 6 papers anotadas manualmente.
+
+#### Corpus de validación
+
+| Paper | Organizaciones | Lugares | IDs de proyecto |
+|-------|---------------|---------|-----------------|
+| paper0 | 1 | 0 | 0 |
+| paper2 | 1 | 0 | 1 |
+| paper3 | 2 | 0 | 0 |
+| paper5 | 2 | 1 | 2 |
+| paper7 | 0 | 0 | 0 |
+| paper9 | 1 | 0 | 0 |
+
+#### Resultados
+
+| Entidad | Precisión | Recall | F1 |
+|---------|-----------|--------|----|
+| ORG | 0.75 | 0.86 | 0.80 |
+| PER | 0 | 0 | 0 |
+| LOC | 1.0 | 1.0 | 1.0 |
+| PROJ | 1.0 | 1.0 | 1.0 |
+
+#### Ejecución de la evaluación
+
+```cmd
+cd docker/pyextractdata/python-scripts
+python tests/evaluate_ner.py
+```
 ## Variables de entorno:
 
 | Variable | Descripción | Valor por defecto |
