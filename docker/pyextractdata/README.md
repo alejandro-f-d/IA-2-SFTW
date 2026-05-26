@@ -89,7 +89,7 @@ con las secciones de agradecimientos de 6 papers anotadas manualmente.
 | PROJ | 1.0 | 1.0 | 1.0 |
 
 #### Ejecución de la evaluación
-
+En el archivo docker/pyextract/python-scripts/test/evaluate_ner.py, se debe completar el golden standard y rellenar los agradecimientos. 
 ```cmd
 cd docker/pyextractdata/python-scripts
 python tests/evaluate_ner.py
