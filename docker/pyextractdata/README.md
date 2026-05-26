@@ -1,8 +1,8 @@
-TODO: Poner la parte del name entity recognition.
+
 
 # PyExtractData
 
-Este módulo recibe como input los XML generados por `pygrobid` y extrae la información de cada paper. Adicionalmente, ejecuta un proceso de Named Entity Recognition .... 
+Este módulo recibe como input los XML generados por `pygrobid` y extrae la información de cada paper. Adicionalmente, ejecuta un proceso de Named Entity Recognition al acknowledgments.
 
 
 ## Flujo de ejecución:
