@@ -3,20 +3,25 @@ from rocrate.model.person import Person
 from rocrate.model.softwareapplication import SoftwareApplication
 from datetime import date
 import os
+import json
 
 
 AUTORES = [
     {
-        "orcid": "https://orcid.org/XXXX-XXXX-XXXX-0001",  # ← pon tu ORCID real
-        "name": "Autor 1",
+        "orcid": "https://orcid.org/0009-0006-7735-3981",
+        "name": "Juan Sebastian Torres Alvarez",
     },
     {
-        "orcid": "https://orcid.org/XXXX-XXXX-XXXX-0002",
-        "name": "Autor 2",
+        "orcid": "https://orcid.org/0009-0007-0060-7856",
+        "name": "Alejandro Fisac Delgado",
     },
     {
-        "orcid": "https://orcid.org/XXXX-XXXX-XXXX-0003",
-        "name": "Autor 3",
+        "orcid": "https://orcid.org/0009-0006-9847-8038",
+        "name": "Andrés Voronovskyy Knyshayid",
+    },
+    {
+        "orcid": "https://orcid.org/0009-0009-5754-3026",
+        "name": "Janele Ángeles Sandonas Feliz",
     },
 ]
 
@@ -33,16 +38,13 @@ crate.description = (
     "similarity scores and topic modeling (BERTopic + KeyBERT), "
     "and builds a Knowledge Graph in Turtle format."
 )
-crate.version = "1.0.0"
-crate.license = "https://creativecommons.org/licenses/by/4.0/"
-crate.datePublished = date.today().isoformat()
-crate.keywords = [
-    "food waste", "knowledge graph", "topic modeling",
-    "semantic similarity", "BERTopic", "Grobid", "ORCID",
-    "Wikidata", "OpenAlex", "RDF", "Turtle"
-]
+crate.root_dataset["version"] = "1.0.0"
+crate.root_dataset["license"] = "https://creativecommons.org/licenses/by/4.0/"
+crate.root_dataset["datePublished"] = date.today().isoformat()
+crate.root_dataset["keywords"] = "food waste, knowledge graph, topic modeling, semantic similarity, BERTopic, Grobid, ORCID, Wikidata, OpenAlex, RDF, Turtle"
 
-upm = crate.add({
+upm = crate.add_jsonld({
+
     "@id": "https://www.upm.es",
     "@type": "Organization",
     "name": "Universidad Politécnica de Madrid",
@@ -72,13 +74,13 @@ crate.add_file("ontology.png", properties={
     "encodingFormat": "image/png"
 })
 
-crate.add_file("use_cases.md", properties={
+crate.add_file("use_case.md", properties={
     "name": "Use Cases",
     "description": "Description of the use cases covered by the system",
     "encodingFormat": "text/markdown"
 })
 
-crate.add_file("select_apis_sparql.md", properties={
+crate.add_file("selected_apis_sparql.md", properties={
     "name": "API and SPARQL selection rationale",
     "description": "Justification for the selected external APIs and SPARQL endpoints",
     "encodingFormat": "text/markdown"
@@ -202,7 +204,7 @@ for filename, description in [
     })
 
 # SERVICIOS EXTERNOS
-crate.add({
+crate.add_jsonld({
     "@id": "https://github.com/kermitt2/grobid",
     "@type": "SoftwareApplication",
     "name": "Grobid 0.8.2",
@@ -211,7 +213,7 @@ crate.add({
     "version": "0.8.2"
 })
 
-crate.add({
+crate.add_jsonld({
     "@id": "https://orcid.org/",
     "@type": "WebAPI",
     "name": "ORCID API",
@@ -219,7 +221,7 @@ crate.add({
     "url": "https://orcid.org/"
 })
 
-crate.add({
+crate.add_jsonld({
     "@id": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service",
     "@type": "WebAPI",
     "name": "Wikidata SPARQL Endpoint",
@@ -227,7 +229,7 @@ crate.add({
     "url": "https://query.wikidata.org/"
 })
 
-crate.add({
+crate.add_jsonld({
     "@id": "https://api.openalex.org/",
     "@type": "WebAPI",
     "name": "OpenAlex API",
@@ -235,7 +237,7 @@ crate.add({
     "url": "https://api.openalex.org/"
 })
 
-crate.add({
+crate.add_jsonld({
     "@id": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2",
     "@type": "SoftwareApplication",
     "name": "all-MiniLM-L6-v2",
@@ -243,7 +245,7 @@ crate.add({
     "url": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"
 })
 
-crate.add({
+crate.add_jsonld({
     "@id": "https://huggingface.co/Jean-Baptiste/roberta-large-ner-english",
     "@type": "SoftwareApplication",
     "name": "roberta-large-ner-english",
@@ -251,12 +253,11 @@ crate.add({
     "url": "https://huggingface.co/Jean-Baptiste/roberta-large-ner-english"
 })
 
-# ─────────────────────────────────────────────
 # GUARDAR
-# ─────────────────────────────────────────────
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-crate.write(OUTPUT_DIR)
+metadata_path = os.path.join(OUTPUT_DIR, "ro-crate-metadata.json")
 
-print(f" RO-Crate generado en: {OUTPUT_DIR}/")
-print(f" {OUTPUT_DIR}/ro-crate-metadata.json")
-print(f" {OUTPUT_DIR}/ro-crate-preview.html")
+with open(metadata_path, "w", encoding="utf-8") as f:
+    json.dump(crate.metadata.generate(), f, indent=2, ensure_ascii=False)
+
+print(f"RO-Crate generado en: {metadata_path}")
