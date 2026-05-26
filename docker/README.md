@@ -70,6 +70,9 @@ CLIENT_URL=https://localhost
 
 # Fuseki
 FUSEKI_PASSWORD=admin
+
+# OpenAlex
+OPENALEX_EMAIL=xxxxxx@xxxx.xxxx
 ```
 ## Red y volúmenes
 
