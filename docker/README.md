@@ -121,8 +121,7 @@ docker compose down -v
 ```
 Una vez ha terminado el flujo de los contenedores se debe subir el knowledge graph a Fuseki. Los pasos están explicados en ![]()
 
-En caso de querer ejecución fuera de contenedores docker seguir los readmes de ejecución de cada uno:
-- [pygrobid](./pygrobid/README.md)
+En caso de querer ejecución fuera de contenedores docker seguir los readmes de ejecución de cada uno de los diferentes dockers.
 
 
 ## Servicios expuestos:
