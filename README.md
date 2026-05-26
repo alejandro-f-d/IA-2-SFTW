@@ -1,7 +1,7 @@
 # Práctica 2: Inteligencia Artificial en Software Abierto
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![DOI](https://zenodo.org/badge/1156519336.svg)]()
+[[![DOI](https://zenodo.org/badge/1156519336.svg)]()](https://doi.org/10.5281/zenodo.20402705)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 El pipeline comienza con el tratamiento de artículos científicos en formato PDF, los cuales son procesados mediante GROBID para su estructuración en archivos XML. A partir de estos documentos, se realiza una extracción de metadatos y datos relevantes que posteriormente se introducen en la librería py-clustering para la agrupación por tópicos y cálculo de la similitud de papers. Una vez generados estos clústeres, los datos se enriquecen mediante consultas a las APIs de ORCID, Wikidata y OpenAlex. Con la información, se modela y construye el grafo de conocimiento utilizando pykg, el cual se despliega en Apache Jena Fuseki para habilitar un endpoint SPARQL. Finalmente, la validez del sistema se demuestra mediante el desarrollo de una aplicación web de prueba como caso de uso.
